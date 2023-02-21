@@ -51,7 +51,8 @@ func receiveAlbum(instanceUrl, pathToSave, id string) {
 			fmt.Printf("Downloadng %v\n", title)
 			trackUrl := instanceUrl + listenUrl
 			rawBody := getWithBody(trackUrl)
-			fpath := filepath.Join(pathToSave, fmt.Sprintf("%s.%s", title, ext))
+			filename := strings.ReplaceAll(fmt.Sprintf("%s.%s", title, ext), "/", "_")
+			fpath := filepath.Join(pathToSave, filename)
 
 			err := os.WriteFile(fpath, rawBody, 0644)
 			check(err)
